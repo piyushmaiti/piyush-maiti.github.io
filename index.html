@@ -56,8 +56,8 @@
         }
 
         .name-badge h1 {
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 50px;
+            font-weight: 700;
             background: linear-gradient(135deg, #64b5f6, #ffd54f);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -65,14 +65,14 @@
         }
 
         .name-badge p {
-            font-size: 14px;
+            font-size: 25px;
             color: #888;
         }
 
         /* Left Side - Research */
         .research-section {
             width: 50%;
-            padding: 120px 60px 60px;
+            padding: 250px 60px 60px;
             background: linear-gradient(135deg, rgba(100, 181, 246, 0.03), rgba(0, 0, 0, 0.8));
             cursor: pointer;
             transition: all 0.6s ease;
@@ -277,7 +277,7 @@
             border-radius: 6px;
             overflow: hidden;
             position: relative;
-            opacity: 0.7;
+            opacity: 1;
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
@@ -290,7 +290,17 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
+            pointer-events: none;  /* Disables right-click */
+            -webkit-user-select: none;  /* Prevents selection */
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-user-drag: none;  /* Prevents dragging */
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+    }
 
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -383,11 +393,21 @@
                     <span class="role-institution">Bhilai Institute of Technology, India</span>
                 </div>
             </div>
+            
+            <!-- Add this CV section here -->
+            <div class="category-item" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #333;">
+                <a href="document/Piyush_Maiti_CV_V.5.pdf" target="_blank" style="color: #64b5f6; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; font-size: 15px; transition: all 0.3s ease;">
+                    <span>📄</span>
+                    <span>Download Full CV (PDF)</span>
+                    <span style="font-size: 12px;">↗</span>
+                </a>
+            </div>
 
             <a href="#research" class="cta-button">
-                <span>Explore Work</span>
+                <span>Explore Work (Under Construction)</span>
                 <span>→</span>
             </a>
+
         </section>
 
         <section class="photography-section">
@@ -397,10 +417,10 @@
 
             <div class="photo-grid">
                 <div class="photo-item">
-                    <img src="images/portfolio//Yosemite-2024-04-11-09-21-59.jpg" alt="Landscape Photography">
+                    <img src="images/portfolio/Yosemite-2024-04-11-09-21-59.jpg" alt="Landscape Photography">
                 </div>
                 <div class="photo-item">
-                    <img src="images/portfolio//IMG_3362-Enhanced-NR-Edit.jpg" alt="Forest Photography">
+                    <img src="images/portfolio/IMG_1116.JPG" alt="Forest Photography">
                 </div>
             </div>
 
@@ -412,10 +432,36 @@
             </div>
 
             <a href="#photography" class="cta-button">
-                <span>View Full Portfolio</span>
+                <span>View Full Portfolio (Under Construction)</span>
                 <span>→</span>
             </a>
         </section>
     </div>
+
+    <script>
+        // Disable right-click on entire page
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // Disable image dragging
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+                return false;
+            }
+        });
+        
+        // Disable certain keyboard shortcuts (Print Screen can't be disabled)
+        document.addEventListener('keydown', function(e) {
+            // Disable Ctrl+S (Save) and Ctrl+A (Select All)
+            if (e.ctrlKey && (e.keyCode === 83 || e.keyCode === 65)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+
 </body>
 </html>
