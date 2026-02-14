@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research & Publications - Piyush Maiti</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .nav-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #333;
+            padding: 20px 60px;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #64b5f6, #ffd54f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #64b5f6;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(100, 181, 246, 0.08), rgba(0, 0, 0, 0.95));
+            border-bottom: 1px solid #333;
+            padding: 140px 60px 80px;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #64b5f6, #81c9ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: #aaa;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto 30px;
+        }
+
+        .scholar-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: rgba(100, 181, 246, 0.1);
+            border: 1px solid #64b5f6;
+            border-radius: 8px;
+            color: #64b5f6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .scholar-link:hover {
+            background: #64b5f6;
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            max-width: 1200px;
+            margin: -40px auto 60px;
+            padding: 0 60px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: rgba(15, 15, 15, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #64b5f6;
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #64b5f6;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Research Areas */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding: 0 60px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #64b5f6;
+        }
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .research-card {
+            background: linear-gradient(135deg, rgba(100, 181, 246, 0.05), rgba(0, 0, 0, 0.5));
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .research-card:hover {
+            border-color: #64b5f6;
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, rgba(100, 181, 246, 0.1), rgba(0, 0, 0, 0.7));
+        }
+
+        .research-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .research-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .research-card p {
+            font-size: 14px;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #333;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid #444;
+            border-radius: 25px;
+            color: #aaa;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: #64b5f6;
+            color: #64b5f6;
+        }
+
+        .filter-btn.active {
+            background: #64b5f6;
+            border-color: #64b5f6;
+            color: #000;
+        }
+
+        /* Publications */
+        .publication-item {
+            background: rgba(15, 15, 15, 0.5);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .publication-item:hover {
+            border-color: #64b5f6;
+            background: rgba(15, 15, 15, 0.8);
+        }
+
+        .publication-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            gap: 20px;
+        }
+
+        .publication-title {
+            font-size: 19px;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .publication-type {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .type-journal {
+            background: rgba(100, 181, 246, 0.2);
+            border: 1px solid #64b5f6;
+            color: #64b5f6;
+        }
+
+        .type-conference {
+            background: rgba(255, 213, 79, 0.2);
+            border: 1px solid #ffd54f;
+            color: #ffd54f;
+        }
+
+        .type-abstract {
+            background: rgba(156, 39, 176, 0.2);
+            border: 1px solid #ab47bc;
+            color: #ab47bc;
+        }
+
+        .type-review {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #81c784;
+            color: #81c784;
+        }
+
+        .publication-authors {
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .publication-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .meta-journal {
+            color: #64b5f6;
+            font-weight: 500;
+        }
+
+        .meta-year {
+            color: #888;
+        }
+
+        .meta-separator {
+            color: #555;
+        }
+
+        .publication-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            padding: 5px 12px;
+            background: rgba(100, 181, 246, 0.1);
+            border: 1px solid rgba(100, 181, 246, 0.3);
+            border-radius: 15px;
+            font-size: 12px;
+            color: #64b5f6;
+        }
+
+        .publication-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .action-btn {
+            padding: 8px 18px;
+            background: rgba(100, 181, 246, 0.1);
+            border: 1px solid #64b5f6;
+            border-radius: 6px;
+            color: #64b5f6;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .action-btn:hover {
+            background: #64b5f6;
+            color: #000;
+        }
+
+        .action-btn.secondary {
+            background: rgba(136, 136, 136, 0.1);
+            border-color: #666;
+            color: #aaa;
+        }
+
+        .action-btn.secondary:hover {
+            background: #666;
+            color: #fff;
+        }
+
+        /* Tools Section */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .tool-card {
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            border-color: #64b5f6;
+            transform: translateY(-5px);
+        }
+
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .tool-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .tool-badge {
+            padding: 5px 12px;
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #81c784;
+            border-radius: 15px;
+            font-size: 11px;
+            color: #81c784;
+            font-weight: 600;
+        }
+
+        .tool-description {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .tool-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #000;
+            border-top: 1px solid #333;
+            padding: 40px 60px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-header {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 120px 20px 60px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .section {
+                padding: 0 20px;
+            }
+
+            .stats-section {
+                padding: 0 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .research-grid,
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .publication-header {
+                flex-direction: column;
+            }
+
+            .footer {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-header">
+        <div class="nav-content">
+            <a href="index.html" class="nav-logo">Piyush Maiti</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="research.html">Research</a>
+                <a href="#publications">Publications</a>
+                <a href="#tools">Tools</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Research & Publications</h1>
+            <p class="hero-subtitle">
+                Advancing neuroimaging analysis methods for Alzheimer's disease research through 
+                multimodal PET/MRI processing, quality control frameworks, and open-source tool development. 
+                Specializing in quantitative biomarker characterization and large-scale multi-site dataset harmonization.
+            </p>
+            <a href="https://scholar.google.com/citations?user=Hv805ogAAAAJ&hl=en" target="_blank" class="scholar-link">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-24L0 9.5l4.838 3.94A8 8 0 0112 9a8 8 0 017.162 4.44L24 9.5z"/>
+                </svg>
+                View Google Scholar Profile
+            </a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📄</div>
+                <div class="stat-value">15</div>
+                <div class="stat-label">Publications</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎤</div>
+                <div class="stat-value">10</div>
+                <div class="stat-label">Abstracts</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-value">232</div>
+                <div class="stat-label">Citations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-value">5</div>
+                <div class="stat-label">H-Index</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Areas -->
+    <section class="section">
+        <h2 class="section-title">Research Areas</h2>
+        <div class="research-grid">
+            <div class="research-card">
+                <div class="research-icon">🧠</div>
+                <h3>Alzheimer's Disease Neuroimaging</h3>
+                <p>Multimodal PET/MRI analysis for early-onset and late-onset AD cohorts, biomarker characterization, and longitudinal trajectory analysis</p>
+            </div>
+            <div class="research-card">
+                <div class="research-icon">🔬</div>
+                <h3>PET Quantification & Kinetic Modeling</h3>
+                <p>Advanced quantification frameworks, compartmental modeling, and partial volume correction techniques for molecular imaging</p>
+            </div>
+            <div class="research-card">
+                <div class="research-icon">✓</div>
+                <h3>Quality Control & Harmonization</h3>
+                <p>Automated QC tools for large-scale neuroimaging datasets and cross-site harmonization methodologies</p>
+            </div>
+            <div class="research-card">
+                <div class="research-icon">🤖</div>
+                <h3>Deep Learning for Medical Imaging</h3>
+                <p>Style-encoding GANs for MRI harmonization, artifact removal, and automated segmentation quality assurance</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section class="section" id="publications">
+        <h2 class="section-title">Publications & Abstracts</h2>
+        
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterPublications('all')">All</button>
+            <button class="filter-btn" onclick="filterPublications('journal')">Journal Articles</button>
+            <button class="filter-btn" onclick="filterPublications('conference')">Conference Papers</button>
+            <button class="filter-btn" onclick="filterPublications('abstract')">Abstracts</button>
+            <button class="filter-btn" onclick="filterPublications('2025')">2025</button>
+            <button class="filter-btn" onclick="filterPublications('2024')">2024</button>
+            <button class="filter-btn" onclick="filterPublications('2021')">2021</button>
+        </div>
+
+        <!-- Publications List -->
+        <div id="publications-list">
+            
+            <!-- 2025 Publications -->
+            <div class="publication-item" data-type="journal" data-year="2025">
+                <div class="publication-header">
+                    <h3 class="publication-title">Amyloid PET in Sporadic Early-Versus Late-Onset Alzheimer's Disease: Comparison of the LEADS and ADNI Cohorts</h3>
+                    <span class="publication-type type-journal">Journal</span>
+                </div>
+                <p class="publication-authors">
+                    Lagarde J., <strong>Maiti P.</strong>, Schonhaut D. R., Blazhenets G., Zhang J., Eloyan A., Thangarajah M., et al.
+                </p>
+                <div class="publication-meta">
+                    <span class="meta-journal">Annals of Neurology</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-year">2025</span>
+                </div>
+                <div class="publication-tags">
+                    <span class="tag">Alzheimer's Disease</span>
+                    <span class="tag">PET</span>
+                    <span class="tag">LEADS</span>
+                    <span class="tag">ADNI</span>
+                </div>
+                <div class="publication-actions">
+                    <a href="#" class="action-btn">📄 PDF</a>
+                    <a href="#" class="action-btn secondary">🔗 DOI</a>
+                    
+                </div>
+            </div>
+
+            <div class="publication-item" data-type="journal" data-year="2025">
+                <div class="publication-header">
+                    <h3 class="publication-title">Exploring Centiloid Robustness: Impact of Sample Size and Image Resolution on Centiloid Conversion Accuracy</h3>
+                    <span class="publication-type type-journal">Journal</span>
+                </div>
+                <p class="publication-authors">
+                    Zhang J., Soleimani-Meigooni D. N., Koeppe R., Ackley S., Schonhaut D. R., Lin Z. E., <strong>Maiti P.</strong>, et al.
+                </p>
+                <div class="publication-meta">
+                    <span class="meta-journal">Journal of Nuclear Medicine</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-year">2025</span>
+                </div>
+                <div class="publication-tags">
+                    <span class="tag">PET</span>
+                    <span class="tag">Centiloid</span>
+                    <span class="tag">Quantification</span>
+                </div>
+                <div class="publication-actions">
+                    <a href="#" class="action-btn">📄 PDF</a>
+                    <a href="#" class="action-btn secondary">🔗 DOI</a>
+                    
+                </div>
+            </div>
+
+            <div class="publication-item" data-type="journal" data-year="2025">
+                <div class="publication-header">
+                    <h3 class="publication-title">Tau Topography Subtypes Account for Clinical Heterogeneity and Longitudinal Trajectories in Early-Onset Alzheimer's Disease</h3>
+                    <span class="publication-type type-review">Under Review</span>
+                </div>
+                <p class="publication-authors">
+                    Lin M., Chiotis K., <strong>Maiti P.</strong>, Zhang J., Blazhenets G., et al.
+                </p>
+                <div class="publication-meta">
+                    <span class="meta-journal">Brain Communications</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-year">2025 (Under Review)</span>
+                </div>
+                <div class="publication-tags">
+                    <span class="tag">Tau PET</span>
+                    <span class="tag">Early-Onset AD</span>
+                    <span class="tag">Subtypes</span>
+                </div>
+                <div class="publication-actions">
+                    
+                </div>
+            </div>
+
+            <!-- 2024 Publications -->
+            <div class="publication-item" data-type="journal" data-year="2024">
+                <div class="publication-header">
+                    <h3 class="publication-title">Evaluation of Copanlisib in Combination with Eribulin in Triple-Negative Breast Cancer Patient-Derived Xenograft Models</h3>
+                    <span class="publication-type type-journal">Journal</span>
+                </div>
+                <p class="publication-authors">
+                    Guo Z., Luo J., Mashl R. J., Hoog J., <strong>Maiti P.</strong>, Fettig N., Davies S. R., et al.
+                </p>
+                <div class="publication-meta">
+                    <span class="meta-journal">Cancer Research Communications, 4(6)</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-year">2024</span>
+                    <span class="meta-separator">•</span>
+                    <span>pp. 1430–1440</span>
+                </div>
+                <div class="publication-tags">
+                    <span class="tag">Cancer Research</span>
+                    <span class="tag">Preclinical Imaging</span>
+                    <span class="tag">PDX Models</span>
+                </div>
+                <div class="publication-actions">
+                    <a href="#" class="action-btn">📄 PDF</a>
+                    <a href="#" class="action-btn secondary">🔗 DOI</a>
+                    
+                </div>
+            </div>
+
+            <!-- 2021 Publications -->
+            <div class="publication-item" data-type="conference" data-year="2021">
+                <div class="publication-header">
+                    <h3 class="publication-title">Style Transfer Using Generative Adversarial Networks for Multi-Site MRI Harmonization</h3>
+                    <span class="publication-type type-conference">Conference</span>
+                </div>
+                <p class="publication-authors">
+                    Liu M., <strong>Maiti P.</strong>, Thomopoulos S., Zhu A., Chai Y., Kim H., Jahanshad N.
+                </p>
+                <div class="publication-meta">
+                    <span class="meta-journal">MICCAI 2021</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-year">2021</span>
+                    <span class="meta-separator">•</span>
+                    <span>pp. 313–322, Springer</span>
+                </div>
+                <div class="publication-tags">
+                    <span class="tag">Deep Learning</span>
+                    <span class="tag">MRI Harmonization</span>
+                    <span class="tag">GANs</span>
+                </div>
+                <div class="publication-actions">
+                    <a href="#" class="action-btn">📄 PDF</a>
+                    <a href="#" class="action-btn secondary">🔗 DOI</a>
+                    
+                </div>
+            </div>
+
+            <div class="publication-item" data-type="conference" data-year="2021">
+                <div class="publication-header">
+                    <h3 class="publication-title">Diffusion MRI Metrics and Their Relation to Dementia Severity: Effects of Harmonization Approaches</h3>
+                    <span class="publication-type type-conference">Conference</span>
+                </div>
+                <p class="publication-authors">
+                    Thomopoulos S., Nir T. M., Villalon-Reina J. E., Zavaliangos-Petropulu A., <strong>Maiti P.</strong>, Zheng H., Nourollahimoghadam E., et al.
+                </p>
+                <div class="publication-meta">
+                    <span class="meta-journal">ISPA 2021</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-year">2021</span>
+                    <span class="meta-separator">•</span>
+                    <span>Brazil</span>
+                </div>
+                <div class="publication-tags">
+                    <span class="tag">Diffusion MRI</span>
+                    <span class="tag">Harmonization</span>
+                    <span class="tag">Dementia</span>
+                </div>
+                <div class="publication-actions">
+                    <a href="#" class="action-btn">📄 PDF</a>
+                    <a href="#" class="action-btn secondary">🔗 DOI</a>
+                    
+                </div>
+            </div>
+
+            <div class="publication-item" data-type="conference" data-year="2021">
+                <div class="publication-header">
+                    <h3 class="publication-title">Region-Specific Automatic Quality Assurance for MRI-Derived Cortical Segmentations</h3>
+                    <span class="publication-type type-conference">Conference</span>
+                </div>
+                <p class="publication-authors">
+                    Gadewar S., Zhu A. H., Thomopoulos S. I., Li Z., Ba Gari I., <strong>Maiti P.</strong>, Thompson P. M., Jahanshad N.
+                </p>
+                <div class="publication-meta">
+                    <span class="meta-journal">IEEE ISBI 2021</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-year">2021</span>
+                    <span class="meta-separator">•</span>
+                    <span>France</span>
+                </div>
+                <div class="publication-tags">
+                    <span class="tag">Quality Control</span>
+                    <span class="tag">MRI</span>
+                    <span class="tag">Segmentation</span>
+                </div>
+                <div class="publication-actions">
+                    <a href="#" class="action-btn">📄 PDF</a>
+                    <a href="#" class="action-btn secondary">🔗 DOI</a>
+                    
+                </div>
+            </div>
+
+            <!-- 2016 Publication -->
+            <div class="publication-item" data-type="journal" data-year="2016">
+                <div class="publication-header">
+                    <h3 class="publication-title">Application of Ultrasonic Sensors for the Development of Anti-Collision Device</h3>
+                    <span class="publication-type type-journal">Journal</span>
+                </div>
+                <p class="publication-authors">
+                    <strong>Maiti P.</strong>, Bhusnur S.
+                </p>
+                <div class="publication-meta">
+                    <span class="meta-journal">International Journal of Electrical and Electronic Engineering & Telecommunications</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-year">2016</span>
+                    <span class="meta-separator">•</span>
+                    <span>Vol. 5, No. 1, pp. 20–27</span>
+                </div>
+                <div class="publication-tags">
+                    <span class="tag">Sensors</span>
+                    <span class="tag">Engineering</span>
+                </div>
+                <div class="publication-actions">
+                    <a href="#" class="action-btn">📄 PDF</a>
+                    <a href="#" class="action-btn secondary">🔗 DOI</a>
+                    
+                </div>
+            </div>
+
+            <!-- Conference Abstracts -->
+            <div class="publication-item" data-type="abstract" data-year="2026">
+                <div class="publication-header">
+                    <h3 class="publication-title">Discordance Between Amyloid PET Visual Read and Quantitation: False Positives or Early Pathology Detection?</h3>
+                    <span class="publication-type type-abstract">Abstract</span>
+                </div>
+                <p class="publication-authors">
+                    Heston M. B., <strong>Maiti P.</strong>, Blazhenets G., Soleimani-Meigooni D. N., Lin Z., et al.
+                </p>
+                <div class="publication-meta">
+                    <span class="meta-journal">Human Amyloid Imaging (HAI)</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-year">2026 (Accepted)</span>
+                </div>
+                <div class="publication-tags">
+                    <span class="tag">Amyloid PET</span>
+                    <span class="tag">Visual Read</span>
+                    <span class="tag">Quantification</span>
+                </div>
+                <div class="publication-actions">
+                    
+                </div>
+            </div>
+
+            <div class="publication-item" data-type="abstract" data-year="2026">
+                <div class="publication-header">
+                    <h3 class="publication-title">Amyloid-PET and White Matter Hyperintensities but Not Military Service Duration nor Combat Exposure Are Associated with Neurodegeneration and Cognitive Impairment in Older Veterans</h3>
+                    <span class="publication-type type-abstract">Abstract</span>
+                </div>
+                <p class="publication-authors">
+                    Rocha S., Pasternak S., Lesman-Segev O., Schwartz D., Blazhenets G., <strong>Maiti P.</strong>, et al.
+                </p>
+                <div class="publication-meta">
+                    <span class="meta-journal">Human Amyloid Imaging (HAI)</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-year">2026 (Accepted)</span>
+                </div>
+                <div class="publication-tags">
+                    <span class="tag">Amyloid PET</span>
+                    <span class="tag">Veterans Health</span>
+                    <span class="tag">White Matter</span>
+                </div>
+                <div class="publication-actions">
+                    
+                </div>
+            </div>
+
+            <div class="publication-item" data-type="abstract" data-year="2025">
+                <div class="publication-header">
+                    <h3 class="publication-title">Clinical and Cognitive Manifestations of Hemispheric Asymmetry in Neuroimaging Biomarkers in Early-Onset Alzheimer's Disease</h3>
+                    <span class="publication-type type-abstract">Abstract</span>
+                </div>
+                <p class="publication-authors">
+                    Ziontz J., <strong>Maiti P.</strong>, Zhang J., Chiotis K., Blazhenets G., Rocha S., Shankar R., et al.
+                </p>
+                <div class="publication-meta">
+                    <span class="meta-journal">AAIC 2025</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-year">2025</span>
+                    <span class="meta-separator">•</span>
+                    <span>Philadelphia, PA</span>
+                </div>
+                <div class="publication-tags">
+                    <span class="tag">Early-Onset AD</span>
+                    <span class="tag">Hemispheric Asymmetry</span>
+                    <span class="tag">Biomarkers</span>
+                </div>
+                <div class="publication-actions">
+                    
+                </div>
+            </div>
+
+            <div class="publication-item" data-type="abstract" data-year="2025">
+                <div class="publication-header">
+                    <h3 class="publication-title">Tau PET Load in Early- and Late-Onset Alzheimer's Disease: A Cross-Sectional and Longitudinal Comparison of the LEADS and ADNI Cohorts</h3>
+                    <span class="publication-type type-abstract">Abstract</span>
+                </div>
+                <p class="publication-authors">
+                    Chiotis K., Blazhenets G., Schonhaut D. R., Lagarde J., <strong>Maiti P.</strong>, Zhang J., Shankar R., et al.
+                </p>
+                <div class="publication-meta">
+                    <span class="meta-journal">AAIC 2025</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-year">2025</span>
+                </div>
+                <div class="publication-tags">
+                    <span class="tag">Tau PET</span>
+                    <span class="tag">LEADS</span>
+                    <span class="tag">ADNI</span>
+                </div>
+                <div class="publication-actions">
+                    
+                </div>
+            </div>
+
+            <div class="publication-item" data-type="abstract" data-year="2025">
+                <div class="publication-header">
+                    <h3 class="publication-title">Tablet-Based Cognitive Assessment in a Multisite Study of Early-Onset Alzheimer's Disease: Association with Pen-and-Paper Tests and PET Measures of Amyloid and Tau</h3>
+                    <span class="publication-type type-abstract">Abstract</span>
+                </div>
+                <p class="publication-authors">
+                    Njamnshi W. Y., Chiotis K., Tsoy E., Possin K. L., Hammers D. B., Eloyan A., Kirby K., <strong>Maiti P.</strong>, et al.
+                </p>
+                <div class="publication-meta">
+                    <span class="meta-journal">AAIC 2025</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-year">2025</span>
+                </div>
+                <div class="publication-tags">
+                    <span class="tag">Cognitive Assessment</span>
+                    <span class="tag">TabCAT</span>
+                    <span class="tag">Early-Onset AD</span>
+                </div>
+                <div class="publication-actions">
+                    
+                </div>
+            </div>
+
+            <div class="publication-item" data-type="abstract" data-year="2024">
+                <div class="publication-header">
+                    <h3 class="publication-title">A Clock Model of Regional Tau-PET Accumulation and Cognitive Decline in Sporadic Early-Onset Alzheimer's Disease</h3>
+                    <span class="publication-type type-abstract">Abstract</span>
+                </div>
+                <p class="publication-authors">
+                    Schonhaut D. R., Insel P. S., Soleimani-Meigooni D. N., Zeltzer E., Windon C., <strong>Maiti P.</strong>, Yballa C., et al.
+                </p>
+                <div class="publication-meta">
+                    <span class="meta-journal">Alzheimer's & Dementia, 20</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-year">2024</span>
+                    <span class="meta-separator">•</span>
+                    <span>e093935</span>
+                </div>
+                <div class="publication-tags">
+                    <span class="tag">Tau PET</span>
+                    <span class="tag">Early-Onset AD</span>
+                    <span class="tag">Cognitive Decline</span>
+                </div>
+                <div class="publication-actions">
+                    
+                </div>
+            </div>
+
+            <div class="publication-item" data-type="abstract" data-year="2023">
+                <div class="publication-header">
+                    <h3 class="publication-title">Assessing the Performance of Software Platforms to Segment Mouse Brains Using a Digital Phantom</h3>
+                    <span class="publication-type type-abstract">Abstract</span>
+                </div>
+                <p class="publication-authors">
+                    <strong>Maiti P.</strong>, Li S., Dutta K., Whitehead T., Shoghi K.
+                </p>
+                <div class="publication-meta">
+                    <span class="meta-journal">SNMMI 2023</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-year">2023</span>
+                    <span class="meta-separator">•</span>
+                    <span>Chicago, IL</span>
+                </div>
+                <div class="publication-tags">
+                    <span class="tag">Preclinical Imaging</span>
+                    <span class="tag">Segmentation</span>
+                    <span class="tag">Quality Control</span>
+                </div>
+                <div class="publication-actions">
+                    
+                </div>
+            </div>
+
+            <div class="publication-item" data-type="abstract" data-year="2023">
+                <div class="publication-header">
+                    <h3 class="publication-title">Imaging Neuroinflammation in an Animal Model of Diet-Induced Obesity</h3>
+                    <span class="publication-type type-abstract">Abstract</span>
+                </div>
+                <p class="publication-authors">
+                    Shyam C., Whitehead T., Zhou D., Qiu L., <strong>Maiti P.</strong>, Tu Z., Kravitz A., Hershey T., Shoghi K.
+                </p>
+                <div class="publication-meta">
+                    <span class="meta-journal">SNMMI 2023</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-year">2023</span>
+                    <span class="meta-separator">•</span>
+                    <span>Chicago, IL</span>
+                </div>
+                <div class="publication-tags">
+                    <span class="tag">PET</span>
+                    <span class="tag">Neuroinflammation</span>
+                    <span class="tag">Obesity</span>
+                </div>
+                <div class="publication-actions">
+                    
+                </div>
+            </div>
+
+            <div class="publication-item" data-type="abstract" data-year="2021">
+                <div class="publication-header">
+                    <h3 class="publication-title">Multi-Site MRI Harmonization Using Unified Generative Adversarial Networks</h3>
+                    <span class="publication-type type-abstract">Abstract</span>
+                </div>
+                <p class="publication-authors">
+                    Liu M., <strong>Maiti P.</strong>, Thomopoulos S., Kadakova N., Kim H., Jahanshad N.
+                </p>
+                <div class="publication-meta">
+                    <span class="meta-journal">OHBM 2021</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-year">2021</span>
+                    <span class="meta-separator">•</span>
+                    <span>Seoul, Korea</span>
+                </div>
+                <div class="publication-tags">
+                    <span class="tag">MRI</span>
+                    <span class="tag">Harmonization</span>
+                    <span class="tag">GANs</span>
+                </div>
+                <div class="publication-actions">
+                    
+                </div>
+            </div>
+
+            <div class="publication-item" data-type="abstract" data-year="2021">
+                <div class="publication-header">
+                    <h3 class="publication-title">A 3D U-Net for Gibbs Artifact Removal from Quantitative Susceptibility Maps</h3>
+                    <span class="publication-type type-abstract">Abstract</span>
+                </div>
+                <p class="publication-authors">
+                    Ba Gari I., Gadewar S. P., Wei X., <strong>Maiti P.</strong>, Boyd J., Jahanshad N.
+                </p>
+                <div class="publication-meta">
+                    <span class="meta-journal">ISMRM 2021</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-year">2021</span>
+                    <span class="meta-separator">•</span>
+                    <span>Chicago, IL</span>
+                </div>
+                <div class="publication-tags">
+                    <span class="tag">Deep Learning</span>
+                    <span class="tag">MRI</span>
+                    <span class="tag">Artifact Removal</span>
+                </div>
+                <div class="publication-actions">
+                    
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Tools & Software Section -->
+    <section class="section" id="tools">
+        <h2 class="section-title">Tools & Software</h2>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-header">
+                    <h3 class="tool-title">PET QC Pipeline</h3>
+                    <span class="tool-badge">In Development</span>
+                </div>
+                <p class="tool-description">
+                    Automated quality control framework for multi-site PET imaging datasets with real-time visualization and reporting capabilities for LEADS and ADNI studies.
+                </p>
+                <div class="tool-actions">
+                    <a href="#" class="action-btn secondary">📖 Documentation</a>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-header">
+                    <h3 class="tool-title">MRI/FreeSurfer QC Tools</h3>
+                    <span class="tool-badge">In Development</span>
+                </div>
+                <p class="tool-description">
+                    Interactive HTML-based quality control platform for automated cortical segmentation validation with region-specific metrics and visual overlays.
+                </p>
+                <div class="tool-actions">
+                    <a href="#" class="action-btn secondary">📖 Documentation</a>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-header">
+                    <h3 class="tool-title">3D PET Quantification Framework</h3>
+                    <span class="tool-badge">In Development</span>
+                </div>
+                <p class="tool-description">
+                    Advanced quantification methodology using skeletonized signal extraction to minimize partial volume effects in preclinical PET imaging.
+                </p>
+                <div class="tool-actions">
+                    <a href="#" class="action-btn secondary">📖 Documentation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Piyush Maiti. All rights reserved.</p>
+            <p style="margin-top: 10px;">
+                <a href="/cdn-cgi/l/email-protection#a2d2cbdbd7d1ca8ccfc3cbd6cbe2d7c1d1c48cc7c6d7" style="color: #64b5f6; text-decoration: none;"><span class="__cf_email__" data-cfemail="76061f0f03051e581b171f021f360315051058131203">[email&#160;protected]</span></a>
+            </p>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Filter functionality
+        function filterPublications(filter) {
+            const publications = document.querySelectorAll('.publication-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Update active button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter publications
+            publications.forEach(pub => {
+                if (filter === 'all') {
+                    pub.style.display = 'block';
+                } else if (filter === 'journal') {
+                    pub.style.display = pub.dataset.type === 'journal' ? 'block' : 'none';
+                } else if (filter === 'conference') {
+                    pub.style.display = pub.dataset.type === 'conference' ? 'block' : 'none';
+                } else if (filter === 'abstract') {
+                    pub.style.display = pub.dataset.type === 'abstract' ? 'block' : 'none';
+                } else {
+                    // Year filter
+                    pub.style.display = pub.dataset.year === filter ? 'block' : 'none';
+                }
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+         

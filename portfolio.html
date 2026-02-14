@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography Portfolio - Piyush Maiti</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .portfolio-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: #000000;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            border-right: 1px solid #1a1a1a;
+            position: relative;
+            z-index: 10;
+        }
+
+        .site-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .site-title h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .site-title p {
+            font-size: 12px;
+            color: #888;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .nav-item {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 8px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 2px solid transparent;
+            padding-left: 15px;
+        }
+
+        .nav-item:hover {
+            color: #64b5f6;
+            border-left-color: #64b5f6;
+        }
+
+        .nav-item.active {
+            color: #64b5f6;
+            border-left-color: #64b5f6;
+            font-weight: 500;
+        }
+
+        .nav-divider {
+            height: 1px;
+            background: #1a1a1a;
+            margin: 10px 0;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 0;
+            padding-left: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: #64b5f6;
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Viewer Section */
+        .viewer-section {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000000;
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-image {
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            user-select: none;
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
+
+        /* Navigation Arrows */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(100, 181, 246, 0.1);
+            border: none;
+            color: #64b5f6;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            transition: all 0.3s ease;
+            z-index: 5;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-arrow:hover {
+            background: rgba(100, 181, 246, 0.2);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .nav-arrow.prev {
+            left: 40px;
+        }
+
+        .nav-arrow.next {
+            right: 40px;
+        }
+
+        /* Image Caption */
+        .image-caption {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-width: 400px;
+            z-index: 5;
+        }
+
+        .caption-text {
+            font-size: 15px;
+            color: #ffffff;
+            flex: 1;
+        }
+
+        .image-counter {
+            font-size: 13px;
+            color: #888;
+            margin-left: 30px;
+        }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 0;
+            left: 250px;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 1px solid #1a1a1a;
+            padding: 15px 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            z-index: 10;
+        }
+
+        /* Loading State */
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #64b5f6;
+            font-size: 18px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .portfolio-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 20px;
+                border-right: none;
+                border-bottom: 1px solid #1a1a1a;
+                flex-direction: column;
+                overflow-y: auto;
+                height: auto;
+                gap: 15px;
+            }
+
+            .site-title {
+                margin-bottom: 20px;
+            }
+
+            .site-title h1 {
+                font-size: 24px;
+            }
+
+            .site-title p {
+                font-size: 10px;
+            }
+
+            .nav-menu {
+                gap: 15px;
+            }
+
+            .nav-arrow {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+
+            .nav-arrow.prev {
+                left: 15px;
+            }
+
+            .nav-arrow.next {
+                right: 15px;
+            }
+
+            .image-caption {
+                min-width: auto;
+                width: 90%;
+                flex-direction: column;
+                gap: 10px;
+                padding: 12px 20px;
+            }
+
+            .image-counter {
+                margin-left: 0;
+            }
+
+            .footer {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="portfolio-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="site-title">
+                <h1>Piyush Maiti</h1>
+                <p>PHOTOGRAPHY</p>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-category="portfolio">Portfolio</a>
+                <a href="#" class="nav-item" data-category="street">Street Project</a>
+                <a href="#" class="nav-item" data-category="landscape">Landscape</a>
+                <a href="#" class="nav-item" data-category="cityscape">CityScape</a>
+                <a href="#" class="nav-item" data-category="random">Random</a>
+                <a href="#" class="nav-item" data-category="old">Old Picture Dump</a>
+            </nav>
+
+            <div class="nav-divider"></div>
+
+            <a href="index.html" class="social-link">
+                <svg fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+                <span>Bio</span>
+            </a>
+
+            <a href="index.html#contact" class="social-link">
+                <span>Contact</span>
+            </a>
+        </aside>
+
+        <!-- Image Viewer Section -->
+        <main class="viewer-section">
+            <div class="image-container">
+                <img src="" alt="Photography" class="main-image" id="mainImage">
+                
+                <button class="nav-arrow prev" id="prevBtn">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="32" height="32">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                
+                <button class="nav-arrow next" id="nextBtn">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="32" height="32">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+
+                <div class="image-caption">
+                    <div class="caption-text" id="captionText">Loading...</div>
+                    <div class="image-counter" id="imageCounter">1/1</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        &copy; 2026 by Piyush Maiti
+    </footer>
+
+    <script>
+        // Disable right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Disable image dragging
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // ==========================================
+        // CAPTIONS DATABASE
+        // ==========================================
+        // Edit your captions here - use exact filename as the key
+        const CAPTIONS = {
+            // Cityscape
+            "IMG_3362-Enhanced-NR-Edit.jpg": "San Francisco Fleet Week",
+            "IMG_1116.JPG": "Sacramento Street, San Francisco, California",
+            "DSC01738.jpg": "Golden Gate Bridge, San Francisco, California",
+            "DSC09746.png": "San Francisco Skyline",
+
+            // Landscape
+            "tahoe.jpg": "Lake Tahoe shoreline",
+            "DSC02852-Enhanced-NR-Edit.jpg": "Lake Manzanita, Lassen Volcanic National Park, California",
+            "IMG_4659.jpg": "Trillium Lake, Mt. Hood National Park, Oregon",
+
+            // Random
+            "Yosemite-2024-04-11-09-21-59.jpg": "Yosemite National Park, California",
+            "IMG_9320.JPG": "Yosemite National Park, California",
+            "19938321413_80d6859877_o.jpg": "Leaves, Black & White"
+
+            // Portfolio
+        };
+
+        // ==========================================
+        // AUTOMATIC IMAGE LOADING SYSTEM
+        // ==========================================
+        
+        // Define your image folder structure
+        const IMAGE_FOLDERS = {
+            'portfolio': 'images/portfolio/',  // Your curated best work
+            'street': 'images/street/',
+            'landscape': 'images/landscape/',
+            'cityscape': 'images/cityscape/',
+            'random': 'images/random/',
+            'old': 'images/old/'
+        };
+
+        // List of image files in each folder
+        // Add your image filenames here for each category
+        const IMAGE_FILES = {
+            'portfolio': [
+                'IMG_4659.jpg'
+            ],
+            'street': [
+                // No street photos yet
+            ],
+            'landscape': [
+                'IMG_4659.jpg',
+                'tahoe.jpg'
+            ],
+            'cityscape': [
+            
+                'DSC09746.png',
+                'DSC01738.jpg',
+                'IMG_1116.JPG',
+                'IMG_3362-Enhanced-NR-Edit.jpg'
+
+            ],
+            'random': [
+                'Yosemite-2024-04-11-09-21-59.jpg',
+                'IMG_9320.JPG',
+                '19938321413_80d6859877_o.jpg'
+            ],
+            'old': [
+                // No old photos yet
+            ]
+        };
+
+        let galleryImages = [];
+        let currentIndex = 0;
+        let currentCategory = 'portfolio';
+        let filteredImages = [];
+
+        const mainImage = document.getElementById('mainImage');
+        const captionText = document.getElementById('captionText');
+        const imageCounter = document.getElementById('imageCounter');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        // Build gallery from folder structure
+        function buildGallery() {
+            galleryImages = [];
+            
+            for (const [category, folderPath] of Object.entries(IMAGE_FOLDERS)) {
+                const files = IMAGE_FILES[category] || [];
+                
+                files.forEach(filename => {
+                    const imagePath = folderPath + filename;
+                    
+                    // Get caption from CAPTIONS object or use cleaned filename
+                    let caption = CAPTIONS[filename];
+                    
+                    // If no caption found, create a nice one from filename
+                    if (!caption) {
+                        caption = filename
+                            .replace(/\.[^/.]+$/, "")  // Remove extension
+                            .replace(/[-_]/g, ' ')      // Replace - and _ with spaces
+                            .replace(/\b\w/g, l => l.toUpperCase()); // Capitalize words
+                    }
+                    
+                    galleryImages.push({
+                        src: imagePath,
+                        caption: caption,
+                        category: category,
+                        filename: filename
+                    });
+                });
+            }
+            
+            console.log(`Loaded ${galleryImages.length} images`);
+            console.log('Gallery:', galleryImages);
+        }
+
+        // Initialize gallery
+        function initGallery() {
+            buildGallery();
+            filterImages(currentCategory);
+            updateDisplay();
+        }
+
+        // Filter images by category
+        function filterImages(category) {
+            currentCategory = category;
+            filteredImages = galleryImages.filter(img => img.category === category);
+            currentIndex = 0;
+        }
+
+        // Update image display
+        function updateDisplay() {
+            if (filteredImages.length === 0) {
+                mainImage.src = '';
+                captionText.textContent = 'No images in this category';
+                imageCounter.textContent = '0/0';
+                return;
+            }
+
+            const currentImage = filteredImages[currentIndex];
+            mainImage.src = currentImage.src;
+            captionText.textContent = currentImage.caption;
+            imageCounter.textContent = `${currentIndex + 1}/${filteredImages.length}`;
+        }
+
+        // Navigation functions
+        function showNext() {
+            if (filteredImages.length === 0) return;
+            currentIndex = (currentIndex + 1) % filteredImages.length;
+            updateDisplay();
+        }
+
+        function showPrevious() {
+            if (filteredImages.length === 0) return;
+            currentIndex = (currentIndex - 1 + filteredImages.length) % filteredImages.length;
+            updateDisplay();
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', showPrevious);
+        nextBtn.addEventListener('click', showNext);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                showNext();
+            } else if (e.key === 'ArrowLeft') {
+                showPrevious();
+            }
+        });
+
+        // Category navigation
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Update active state
+                navItems.forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+                
+                // Filter and display
+                const category = item.dataset.category;
+                filterImages(category);
+                updateDisplay();
+            });
+        });
+
+        // Initialize on page load
+        window.addEventListener('load', initGallery);
+
+        // Prevent keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.keyCode === 83 || e.keyCode === 65)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+</body>
+</html>
