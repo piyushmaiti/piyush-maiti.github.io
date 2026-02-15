@@ -3,20 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photography Portfolio - Piyush Maiti</title>
+    <title>Photography Portfolio &mdash; Piyush Maiti</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg-primary: #050507;
+            --bg-secondary: #0a0a0e;
+            --bg-card: #111116;
+            --accent-gold: #d4a853;
+            --accent-gold-dim: rgba(212, 168, 83, 0.08);
+            --accent-blue: #6fa3d8;
+            --text-primary: #e8e6e1;
+            --text-secondary: #8a8a8f;
+            --text-muted: #555560;
+            --border: #1a1a22;
+            --border-hover: #2a2a35;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #000000;
-            color: #ffffff;
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
             overflow: hidden;
             height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
         .portfolio-container {
@@ -24,103 +42,152 @@
             height: 100vh;
         }
 
-        /* Sidebar */
+        /* ===== SIDEBAR ===== */
         .sidebar {
-            width: 250px;
-            background: #000000;
-            padding: 60px 40px;
+            width: 260px;
+            min-width: 260px;
+            background: var(--bg-primary);
+            border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
-            gap: 30px;
-            border-right: 1px solid #1a1a1a;
-            position: relative;
+            padding: 50px 0;
             z-index: 10;
         }
 
-        .site-title {
-            text-align: center;
-            margin-bottom: 40px;
+        .sidebar-header {
+            padding: 0 32px;
+            margin-bottom: 50px;
         }
 
-        .site-title h1 {
-            font-size: 32px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
+        .sidebar-name {
+            font-family: var(--font-display);
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
         }
 
-        .site-title p {
-            font-size: 12px;
-            color: #888;
-            letter-spacing: 3px;
-            text-transform: uppercase;
+        .sidebar-name a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .sidebar-name a:hover { color: var(--accent-gold); }
+
+        .sidebar-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
         }
 
         .nav-menu {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .nav-group-title {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            padding: 0 12px;
+            margin-bottom: 16px;
         }
 
         .nav-item {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 400;
-            padding: 8px 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-left: 2px solid transparent;
-            padding-left: 15px;
-        }
-
-        .nav-item:hover {
-            color: #64b5f6;
-            border-left-color: #64b5f6;
-        }
-
-        .nav-item.active {
-            color: #64b5f6;
-            border-left-color: #64b5f6;
-            font-weight: 500;
-        }
-
-        .nav-divider {
-            height: 1px;
-            background: #1a1a1a;
-            margin: 10px 0;
-        }
-
-        .social-link {
             display: flex;
             align-items: center;
             gap: 10px;
-            color: #ffffff;
+            color: var(--text-secondary);
             text-decoration: none;
-            font-size: 16px;
-            padding: 8px 0;
-            padding-left: 15px;
-            transition: color 0.3s ease;
+            font-size: 15px;
+            font-weight: 400;
+            padding: 10px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.25s var(--ease-out);
+            margin-bottom: 2px;
+            position: relative;
         }
 
-        .social-link:hover {
-            color: #64b5f6;
+        .nav-item::before {
+            content: '';
+            width: 3px;
+            height: 0;
+            background: var(--accent-gold);
+            border-radius: 2px;
+            position: absolute;
+            left: 0;
+            transition: height 0.3s var(--ease-out);
         }
 
-        .social-link svg {
-            width: 18px;
-            height: 18px;
+        .nav-item:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.02);
         }
 
-        /* Viewer Section */
-        .viewer-section {
+        .nav-item:hover::before { height: 16px; }
+
+        .nav-item.active {
+            color: var(--accent-gold);
+            background: var(--accent-gold-dim);
+            font-weight: 500;
+        }
+
+        .nav-item.active::before { height: 16px; }
+
+        .nav-count {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-left: auto;
+        }
+
+        .sidebar-footer {
+            padding: 0 20px;
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.25s;
+        }
+
+        .sidebar-link:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .sidebar-link svg { width: 16px; height: 16px; }
+
+        /* ===== VIEWER ===== */
+        .viewer {
             flex: 1;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #000000;
+            background: var(--bg-primary);
+            overflow: hidden;
+        }
+
+        .viewer::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(212, 168, 83, 0.02), transparent 70%);
+            pointer-events: none;
         }
 
         .image-container {
@@ -133,276 +200,282 @@
         }
 
         .main-image {
-            max-width: 90%;
-            max-height: 85vh;
+            max-width: 88%;
+            max-height: 82vh;
             object-fit: contain;
             user-select: none;
             -webkit-user-drag: none;
             pointer-events: none;
+            border-radius: 2px;
+            opacity: 0;
+            transform: scale(0.98);
+            transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
         }
 
-        /* Navigation Arrows */
+        .main-image.loaded {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Nav Arrows */
         .nav-arrow {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(100, 181, 246, 0.1);
-            border: none;
-            color: #64b5f6;
-            width: 80px;
-            height: 80px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--text-secondary);
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
-            transition: all 0.3s ease;
+            transition: all 0.4s var(--ease-out);
             z-index: 5;
-            backdrop-filter: blur(10px);
         }
 
         .nav-arrow:hover {
-            background: rgba(100, 181, 246, 0.2);
-            transform: translateY(-50%) scale(1.1);
+            background: rgba(212, 168, 83, 0.08);
+            border-color: rgba(212, 168, 83, 0.2);
+            color: var(--accent-gold);
+            transform: translateY(-50%) scale(1.08);
         }
 
-        .nav-arrow.prev {
-            left: 40px;
-        }
+        .nav-arrow.prev { left: 30px; }
+        .nav-arrow.next { right: 30px; }
 
-        .nav-arrow.next {
-            right: 40px;
-        }
-
-        /* Image Caption */
-        .image-caption {
+        /* Caption Bar */
+        .caption-bar {
             position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 15px 30px;
-            border-radius: 8px;
-            border: 1px solid #333;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(5, 5, 7, 0.95), rgba(5, 5, 7, 0.6) 60%, transparent);
+            padding: 60px 50px 30px;
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: space-between;
-            min-width: 400px;
             z-index: 5;
+            pointer-events: none;
         }
 
         .caption-text {
-            font-size: 15px;
-            color: #ffffff;
-            flex: 1;
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-primary);
+            opacity: 0.9;
+            letter-spacing: 0.3px;
         }
 
         .image-counter {
+            font-family: var(--font-mono);
             font-size: 13px;
-            color: #888;
-            margin-left: 30px;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+        }
+
+        /* Progress bar */
+        .progress-track {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.04);
+            z-index: 6;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-gold);
+            transition: width 0.4s var(--ease-out);
+            opacity: 0.6;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .empty-state p {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-style: italic;
+            opacity: 0.5;
         }
 
         /* Footer */
-        .footer {
+        .viewer-footer {
             position: absolute;
             bottom: 0;
-            left: 250px;
             right: 0;
-            background: rgba(0, 0, 0, 0.9);
-            border-top: 1px solid #1a1a1a;
-            padding: 15px 40px;
-            text-align: center;
-            font-size: 12px;
-            color: #666;
+            padding: 10px 20px;
+            font-size: 11px;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            letter-spacing: 1px;
             z-index: 10;
+            opacity: 0.4;
         }
 
-        /* Loading State */
-        .loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #64b5f6;
-            font-size: 18px;
-        }
-
-        /* Mobile Responsive */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .portfolio-container {
-                flex-direction: column;
-            }
+            .portfolio-container { flex-direction: column; }
 
             .sidebar {
                 width: 100%;
-                padding: 20px;
+                min-width: unset;
                 border-right: none;
-                border-bottom: 1px solid #1a1a1a;
+                border-bottom: 1px solid var(--border);
+                padding: 20px 0 16px;
                 flex-direction: column;
-                overflow-y: auto;
                 height: auto;
-                gap: 15px;
+                overflow: visible;
             }
 
-            .site-title {
-                margin-bottom: 20px;
-            }
-
-            .site-title h1 {
-                font-size: 24px;
-            }
-
-            .site-title p {
-                font-size: 10px;
-            }
+            .sidebar-header { padding: 0 20px; margin-bottom: 16px; }
+            .sidebar-name { font-size: 20px; }
 
             .nav-menu {
-                gap: 15px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 4px;
+                padding: 0 16px;
+                overflow-x: auto;
             }
 
-            .nav-arrow {
-                width: 50px;
-                height: 50px;
-                font-size: 24px;
+            .nav-group-title { display: none; }
+
+            .nav-item {
+                padding: 6px 14px;
+                font-size: 12px;
+                white-space: nowrap;
+                border-radius: 100px;
+                margin-bottom: 0;
             }
 
-            .nav-arrow.prev {
-                left: 15px;
-            }
+            .nav-item::before { display: none; }
+            .nav-count { display: none; }
 
-            .nav-arrow.next {
-                right: 15px;
-            }
+            .sidebar-footer { display: none; }
 
-            .image-caption {
-                min-width: auto;
-                width: 90%;
-                flex-direction: column;
-                gap: 10px;
-                padding: 12px 20px;
-            }
+            .nav-arrow { width: 44px; height: 44px; }
+            .nav-arrow.prev { left: 12px; }
+            .nav-arrow.next { right: 12px; }
 
-            .image-counter {
-                margin-left: 0;
-            }
-
-            .footer {
-                left: 0;
-            }
+            .caption-bar { padding: 40px 20px 20px; }
+            .caption-text { font-size: 15px; }
         }
     </style>
 </head>
 <body>
     <div class="portfolio-container">
-        <!-- Sidebar Navigation -->
+
+        <!-- SIDEBAR -->
         <aside class="sidebar">
-            <div class="site-title">
-                <h1>Piyush Maiti</h1>
-                <p>PHOTOGRAPHY</p>
+            <div class="sidebar-header">
+                <h1 class="sidebar-name"><a href="index.html">Piyush Maiti</a></h1>
+                <p class="sidebar-label">Photography (Under Construction)</p>
             </div>
 
             <nav class="nav-menu">
-                <a href="#" class="nav-item active" data-category="portfolio">Portfolio</a>
-                <a href="#" class="nav-item" data-category="street">Street Project</a>
-                <a href="#" class="nav-item" data-category="landscape">Landscape</a>
-                <a href="#" class="nav-item" data-category="cityscape">CityScape</a>
-                <a href="#" class="nav-item" data-category="random">Random</a>
-                <a href="#" class="nav-item" data-category="old">Old Picture Dump</a>
+                <p class="nav-group-title">Collections</p>
+                <a href="#" class="nav-item active" data-category="portfolio">
+                    Portfolio
+                    <span class="nav-count" id="count-portfolio"></span>
+                </a>
+                <a href="#" class="nav-item" data-category="street">
+                    Street Project
+                    <span class="nav-count" id="count-street"></span>
+                </a>
+                <a href="#" class="nav-item" data-category="landscape">
+                    Landscape
+                    <span class="nav-count" id="count-landscape"></span>
+                </a>
+                <a href="#" class="nav-item" data-category="cityscape">
+                    Cityscape
+                    <span class="nav-count" id="count-cityscape"></span>
+                </a>
+                <a href="#" class="nav-item" data-category="random">
+                    Random
+                    <span class="nav-count" id="count-random"></span>
+                </a>
+                <a href="#" class="nav-item" data-category="old">
+                    Old Picture Dump
+                    <span class="nav-count" id="count-old"></span>
+                </a>
             </nav>
 
-            <div class="nav-divider"></div>
-
-            <a href="index.html" class="social-link">
-                <svg fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-                <span>Bio</span>
-            </a>
-
-            <a href="index.html#contact" class="social-link">
-                <span>Contact</span>
-            </a>
+            <div class="sidebar-footer">
+                <a href="index.html" class="sidebar-link">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    Back to Home
+                </a>
+                <a href="index.html#contact" class="sidebar-link">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    Contact
+                </a>
+            </div>
         </aside>
 
-        <!-- Image Viewer Section -->
-        <main class="viewer-section">
+        <!-- VIEWER -->
+        <main class="viewer">
             <div class="image-container">
                 <img src="" alt="Photography" class="main-image" id="mainImage">
-                
+
                 <button class="nav-arrow prev" id="prevBtn">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="32" height="32">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                    </svg>
-                </button>
-                
-                <button class="nav-arrow next" id="nextBtn">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="32" height="32">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"/>
                     </svg>
                 </button>
 
-                <div class="image-caption">
+                <button class="nav-arrow next" id="nextBtn">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+
+                <div class="caption-bar">
                     <div class="caption-text" id="captionText">Loading...</div>
-                    <div class="image-counter" id="imageCounter">1/1</div>
+                    <div class="image-counter" id="imageCounter">1 / 1</div>
+                </div>
+
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        &copy; 2026 by Piyush Maiti
-    </footer>
-
     <script>
-        // Disable right-click
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-            return false;
-        });
+        // Disable right-click & drag
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+        document.addEventListener('keydown', e => { if (e.ctrlKey && (e.keyCode === 83 || e.keyCode === 65)) e.preventDefault(); });
 
-        // Disable image dragging
-        document.addEventListener('dragstart', function(e) {
-            if (e.target.tagName === 'IMG') {
-                e.preventDefault();
-                return false;
-            }
-        });
-
-        // ==========================================
-        // CAPTIONS DATABASE
-        // ==========================================
-        // Edit your captions here - use exact filename as the key
+        // ===== CAPTIONS =====
         const CAPTIONS = {
-            // Cityscape
             "IMG_3362-Enhanced-NR-Edit.jpg": "San Francisco Fleet Week",
-            "IMG_1116.JPG": "Sacramento Street, San Francisco, California",
-            "DSC01738.jpg": "Golden Gate Bridge, San Francisco, California",
+            "IMG_1116.JPG": "Sacramento Street, San Francisco",
+            "DSC01738.jpg": "Golden Gate Bridge, San Francisco",
             "DSC09746.png": "San Francisco Skyline",
-
-            // Landscape
-            "tahoe.jpg": "Lake Tahoe shoreline",
-            "DSC02852-Enhanced-NR-Edit.jpg": "Lake Manzanita, Lassen Volcanic National Park, California",
-            "IMG_4659.jpg": "Trillium Lake, Mt. Hood National Park, Oregon",
-
-            // Random
+            "tahoe.jpg": "Lake Tahoe Shoreline",
+            "DSC02852-Enhanced-NR-Edit.jpg": "Lake Manzanita, Lassen Volcanic National Park",
+            "IMG_4659.jpg": "Trillium Lake, Mt. Hood, Oregon",
             "Yosemite-2024-04-11-09-21-59.jpg": "Yosemite National Park, California",
             "IMG_9320.JPG": "Yosemite National Park, California",
             "19938321413_80d6859877_o.jpg": "Leaves, Black & White"
-
-            // Portfolio
         };
 
-        // ==========================================
-        // AUTOMATIC IMAGE LOADING SYSTEM
-        // ==========================================
-        
-        // Define your image folder structure
+        // ===== IMAGE DATA =====
         const IMAGE_FOLDERS = {
-            'portfolio': 'images/portfolio/',  // Your curated best work
+            'portfolio': 'images/portfolio/',
             'street': 'images/street/',
             'landscape': 'images/landscape/',
             'cityscape': 'images/cityscape/',
@@ -410,35 +483,13 @@
             'old': 'images/old/'
         };
 
-        // List of image files in each folder
-        // Add your image filenames here for each category
         const IMAGE_FILES = {
-            'portfolio': [
-                'IMG_4659.jpg'
-            ],
-            'street': [
-                // No street photos yet
-            ],
-            'landscape': [
-                'IMG_4659.jpg',
-                'tahoe.jpg'
-            ],
-            'cityscape': [
-            
-                'DSC09746.png',
-                'DSC01738.jpg',
-                'IMG_1116.JPG',
-                'IMG_3362-Enhanced-NR-Edit.jpg'
-
-            ],
-            'random': [
-                'Yosemite-2024-04-11-09-21-59.jpg',
-                'IMG_9320.JPG',
-                '19938321413_80d6859877_o.jpg'
-            ],
-            'old': [
-                // No old photos yet
-            ]
+            'portfolio': ['IMG_4659.jpg'],
+            'street': [],
+            'landscape': ['IMG_4659.jpg', 'tahoe.jpg'],
+            'cityscape': ['DSC09746.png', 'DSC01738.jpg', 'IMG_1116.JPG', 'IMG_3362-Enhanced-NR-Edit.jpg'],
+            'random': ['Yosemite-2024-04-11-09-21-59.jpg', 'IMG_9320.JPG', '19938321413_80d6859877_o.jpg'],
+            'old': []
         };
 
         let galleryImages = [];
@@ -449,74 +500,59 @@
         const mainImage = document.getElementById('mainImage');
         const captionText = document.getElementById('captionText');
         const imageCounter = document.getElementById('imageCounter');
+        const progressFill = document.getElementById('progressFill');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
         const navItems = document.querySelectorAll('.nav-item');
 
-        // Build gallery from folder structure
         function buildGallery() {
             galleryImages = [];
-            
             for (const [category, folderPath] of Object.entries(IMAGE_FOLDERS)) {
                 const files = IMAGE_FILES[category] || [];
-                
                 files.forEach(filename => {
-                    const imagePath = folderPath + filename;
-                    
-                    // Get caption from CAPTIONS object or use cleaned filename
                     let caption = CAPTIONS[filename];
-                    
-                    // If no caption found, create a nice one from filename
                     if (!caption) {
-                        caption = filename
-                            .replace(/\.[^/.]+$/, "")  // Remove extension
-                            .replace(/[-_]/g, ' ')      // Replace - and _ with spaces
-                            .replace(/\b\w/g, l => l.toUpperCase()); // Capitalize words
+                        caption = filename.replace(/\.[^/.]+$/, "").replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
                     }
-                    
-                    galleryImages.push({
-                        src: imagePath,
-                        caption: caption,
-                        category: category,
-                        filename: filename
-                    });
+                    galleryImages.push({ src: folderPath + filename, caption, category, filename });
                 });
+
+                // Update counts
+                const countEl = document.getElementById(`count-${category}`);
+                if (countEl) countEl.textContent = files.length || '—';
             }
-            
-            console.log(`Loaded ${galleryImages.length} images`);
-            console.log('Gallery:', galleryImages);
         }
 
-        // Initialize gallery
-        function initGallery() {
-            buildGallery();
-            filterImages(currentCategory);
-            updateDisplay();
-        }
-
-        // Filter images by category
         function filterImages(category) {
             currentCategory = category;
             filteredImages = galleryImages.filter(img => img.category === category);
             currentIndex = 0;
         }
 
-        // Update image display
         function updateDisplay() {
             if (filteredImages.length === 0) {
                 mainImage.src = '';
-                captionText.textContent = 'No images in this category';
-                imageCounter.textContent = '0/0';
+                mainImage.classList.remove('loaded');
+                captionText.textContent = 'No images in this collection yet';
+                imageCounter.textContent = '— / —';
+                progressFill.style.width = '0%';
                 return;
             }
 
-            const currentImage = filteredImages[currentIndex];
-            mainImage.src = currentImage.src;
-            captionText.textContent = currentImage.caption;
-            imageCounter.textContent = `${currentIndex + 1}/${filteredImages.length}`;
+            const current = filteredImages[currentIndex];
+            mainImage.classList.remove('loaded');
+
+            // Small delay for transition effect
+            setTimeout(() => {
+                mainImage.src = current.src;
+                mainImage.onload = () => mainImage.classList.add('loaded');
+            }, 80);
+
+            captionText.textContent = current.caption;
+            imageCounter.textContent = `${currentIndex + 1} / ${filteredImages.length}`;
+            progressFill.style.width = `${((currentIndex + 1) / filteredImages.length) * 100}%`;
         }
 
-        // Navigation functions
         function showNext() {
             if (filteredImages.length === 0) return;
             currentIndex = (currentIndex + 1) % filteredImages.length;
@@ -529,44 +565,28 @@
             updateDisplay();
         }
 
-        // Event listeners
         prevBtn.addEventListener('click', showPrevious);
         nextBtn.addEventListener('click', showNext);
 
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') {
-                showNext();
-            } else if (e.key === 'ArrowLeft') {
-                showPrevious();
-            }
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight') showNext();
+            else if (e.key === 'ArrowLeft') showPrevious();
         });
 
-        // Category navigation
         navItems.forEach(item => {
-            item.addEventListener('click', (e) => {
+            item.addEventListener('click', e => {
                 e.preventDefault();
-                
-                // Update active state
                 navItems.forEach(nav => nav.classList.remove('active'));
                 item.classList.add('active');
-                
-                // Filter and display
-                const category = item.dataset.category;
-                filterImages(category);
+                filterImages(item.dataset.category);
                 updateDisplay();
             });
         });
 
-        // Initialize on page load
-        window.addEventListener('load', initGallery);
-
-        // Prevent keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && (e.keyCode === 83 || e.keyCode === 65)) {
-                e.preventDefault();
-                return false;
-            }
+        window.addEventListener('load', () => {
+            buildGallery();
+            filterImages(currentCategory);
+            updateDisplay();
         });
     </script>
 </body>
