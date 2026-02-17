@@ -461,16 +461,26 @@
 
         // ===== CAPTIONS =====
         const CAPTIONS = {
+
+            // Cityscape captions (from metadata where available, otherwise filename-based)
             "IMG_3362-Enhanced-NR-Edit.jpg": "San Francisco Fleet Week",
             "IMG_1116.JPG": "Sacramento Street, San Francisco",
             "DSC01738.jpg": "Golden Gate Bridge, San Francisco",
             "DSC09746.png": "San Francisco Skyline",
-            "tahoe.jpg": "Lake Tahoe Shoreline",
+            
+            // Random captions (no metadata, so using filename-based captions)
+            "19938321413_80d6859877_o.jpg": "Leaves, Black & White",
+            
+            // Landscape captions (no metadata, so using filename-based captions)
             "DSC02852-Enhanced-NR-Edit.jpg": "Lake Manzanita, Lassen Volcanic National Park",
             "IMG_4659.jpg": "Trillium Lake, Mt. Hood, Oregon",
             "Yosemite-2024-04-11-09-21-59.jpg": "Yosemite National Park, California",
             "IMG_9320.JPG": "Yosemite National Park, California",
-            "19938321413_80d6859877_o.jpg": "Leaves, Black & White"
+            
+            // Landscape(Yellowstone) captions (no metadata, so using filename-based captions)
+            "_DSC4162.jpg": "Yellowstone National Park, Wyoming",
+            "_DSC4179.jpg": "Yellowstone National Park, Wyoming",
+            "_DSC4180.jpg": "Yellowstone National Park, Wyoming"
         };
 
         // ===== IMAGE DATA =====
@@ -486,7 +496,7 @@
         const IMAGE_FILES = {
             'portfolio': ['IMG_4659.jpg'],
             'street': [],
-            'landscape': ['IMG_4659.jpg', 'tahoe.jpg'],
+            'landscape': ['IMG_4659.jpg', '_DSC4162.jpg','_DSC4179.jpg', '_DSC4180.jpg'],
             'cityscape': ['DSC09746.png', 'DSC01738.jpg', 'IMG_1116.JPG', 'IMG_3362-Enhanced-NR-Edit.jpg'],
             'random': ['Yosemite-2024-04-11-09-21-59.jpg', 'IMG_9320.JPG', '19938321413_80d6859877_o.jpg'],
             'old': []
