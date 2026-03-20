@@ -372,6 +372,10 @@
         .cta-photography::after { background: var(--accent-gold); }
         .cta-photography .arrow { background: var(--accent-gold-dim); border: 1px solid rgba(212, 168, 83, 0.2); }
 
+        .cta-life { color: var(--text-primary); }
+        .cta-life::after { background: var(--text-primary); }
+        .cta-life .arrow { background: rgba(232, 230, 225, 0.08); border: 1px solid rgba(232, 230, 225, 0.2); }
+
         .cv-link {
             display: inline-flex;
             align-items: center;
@@ -428,6 +432,82 @@
         }
 
         .photo-item:hover img { transform: scale(1.05); }
+
+        /* ===== LIFE SECTION (NEW) ===== */
+        .life-section {
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 100px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .life-section::before {
+            content: '';
+            position: absolute;
+            width: 400px; height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(111, 163, 216, 0.04), transparent 70%);
+            top: -100px; right: -100px;
+            animation: float-orb 30s ease-in-out infinite;
+        }
+
+        .life-section::after {
+            content: '';
+            position: absolute;
+            width: 350px; height: 350px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 168, 83, 0.04), transparent 70%);
+            bottom: -80px; left: -80px;
+            animation: float-orb 35s ease-in-out infinite reverse;
+        }
+
+        .life-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .life-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .life-title {
+            font-family: var(--font-display);
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .life-content {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .life-content p {
+            margin-bottom: 20px;
+        }
+
+        .life-cta-wrapper {
+            text-align: center;
+        }
 
         /* ===== FOOTER ===== */
         .footer {
@@ -538,6 +618,7 @@
             .split-section { padding: 60px 30px; }
             .section-number { display: none; }
             .hero { padding: 40px 24px; min-height: 80vh; }
+            .life-section { padding: 60px 30px; }
             .footer { padding: 60px 24px; }
             .contact-row { flex-direction: column; align-items: center; gap: 16px; }
         }
@@ -674,6 +755,33 @@
         </section>
     </div>
 
+    <!-- LIFE SECTION (NEW) -->
+    <section class="life-section">
+        <div class="life-inner reveal">
+            <p class="life-label">Beyond Work</p>
+            <h2 class="life-title">Life Outside the Lab</h2>
+            <div class="life-content">
+                <p>
+                    When I'm not analyzing neuroimaging data or capturing landscapes through my lens, 
+                    you'll find me training for triathlons, exploring new routes on my bike, 
+                    experimenting with flavors in the kitchen, or working with paint and canvas. 
+                    I believe in maintaining balance between rigorous scientific work and creative pursuits.
+                </p>
+                <p>
+                    Running and cycling offer the mental clarity that fuels my analytical work, 
+                    while cooking allows me to experiment with precision in a completely different domain. 
+                    Painting provides yet another form of visual expression—working with color, texture, 
+                    and abstraction in ways that complement my photography but stand entirely on their own.
+                </p>
+            </div>
+            <div class="life-cta-wrapper">
+                <a href="art.html" class="cta-link cta-life">
+                    View My Paintings <span class="arrow">&rarr;</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-inner reveal">
@@ -718,5 +826,6 @@
 
         document.querySelectorAll('.reveal, .stagger').forEach(el => observer.observe(el));
     </script>
+
 </body>
 </html>

@@ -217,6 +217,47 @@
             transform: scale(1);
         }
 
+        /* ===== LOADING SPINNER ===== */
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.3s var(--ease-out);
+            pointer-events: none;
+        }
+
+        .loading-spinner.visible {
+            opacity: 1;
+        }
+
+        .spinner-ring {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(212, 168, 83, 0.1);
+            border-top-color: var(--accent-gold);
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .spinner-text {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
         /* Nav Arrows */
         .nav-arrow {
             position: absolute;
@@ -308,20 +349,6 @@
             font-size: 20px;
             font-style: italic;
             opacity: 0.5;
-        }
-
-        /* Footer */
-        .viewer-footer {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            padding: 10px 20px;
-            font-size: 11px;
-            color: var(--text-muted);
-            font-family: var(--font-mono);
-            letter-spacing: 1px;
-            z-index: 10;
-            opacity: 0.4;
         }
 
         /* ===== RESPONSIVE ===== */
@@ -427,6 +454,12 @@
         <!-- VIEWER -->
         <main class="viewer">
             <div class="image-container">
+                <!-- Loading Spinner -->
+                <div class="loading-spinner" id="loadingSpinner">
+                    <div class="spinner-ring"></div>
+                    <span class="spinner-text">Loading</span>
+                </div>
+
                 <img src="" alt="Photography" class="main-image" id="mainImage">
 
                 <button class="nav-arrow prev" id="prevBtn">
@@ -442,7 +475,7 @@
                 </button>
 
                 <div class="caption-bar">
-                    <div class="caption-text" id="captionText">Loading...</div>
+                    <div class="caption-text" id="captionText"></div>
                     <div class="image-counter" id="imageCounter">1 / 1</div>
                 </div>
 
@@ -461,23 +494,15 @@
 
         // ===== CAPTIONS =====
         const CAPTIONS = {
-
-            // Cityscape captions (from metadata where available, otherwise filename-based)
             "IMG_3362-Enhanced-NR-Edit.jpg": "San Francisco Fleet Week",
             "IMG_1116.JPG": "Sacramento Street, San Francisco",
             "DSC01738.jpg": "Golden Gate Bridge, San Francisco",
             "DSC09746.png": "San Francisco Skyline",
-            
-            // Random captions (no metadata, so using filename-based captions)
             "19938321413_80d6859877_o.jpg": "Leaves, Black & White",
-            
-            // Landscape captions (no metadata, so using filename-based captions)
             "DSC02852-Enhanced-NR-Edit.jpg": "Lake Manzanita, Lassen Volcanic National Park",
             "IMG_4659.jpg": "Trillium Lake, Mt. Hood, Oregon",
             "Yosemite-2024-04-11-09-21-59.jpg": "Yosemite National Park, California",
             "IMG_9320.JPG": "Yosemite National Park, California",
-            
-            // Landscape(Yellowstone) captions (no metadata, so using filename-based captions)
             "_DSC4162.jpg": "Yellowstone National Park, Wyoming",
             "_DSC4179.jpg": "Yellowstone National Park, Wyoming",
             "_DSC4180.jpg": "Yellowstone National Park, Wyoming"
@@ -506,6 +531,7 @@
         let currentIndex = 0;
         let currentCategory = 'portfolio';
         let filteredImages = [];
+        const preloadCache = {};
 
         const mainImage = document.getElementById('mainImage');
         const captionText = document.getElementById('captionText');
@@ -514,6 +540,7 @@
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
         const navItems = document.querySelectorAll('.nav-item');
+        const loadingSpinner = document.getElementById('loadingSpinner');
 
         function buildGallery() {
             galleryImages = [];
@@ -539,10 +566,26 @@
             currentIndex = 0;
         }
 
+        // Preload the next and previous images in background
+        function preloadAdjacent() {
+            if (filteredImages.length <= 1) return;
+            const nextIdx = (currentIndex + 1) % filteredImages.length;
+            const prevIdx = (currentIndex - 1 + filteredImages.length) % filteredImages.length;
+            [nextIdx, prevIdx].forEach(idx => {
+                const src = filteredImages[idx].src;
+                if (!preloadCache[src]) {
+                    const img = new Image();
+                    img.src = src;
+                    preloadCache[src] = img;
+                }
+            });
+        }
+
         function updateDisplay() {
             if (filteredImages.length === 0) {
                 mainImage.src = '';
                 mainImage.classList.remove('loaded');
+                loadingSpinner.classList.remove('visible');
                 captionText.textContent = 'No images in this collection yet';
                 imageCounter.textContent = '— / —';
                 progressFill.style.width = '0%';
@@ -550,17 +593,39 @@
             }
 
             const current = filteredImages[currentIndex];
+
+            // Hide current image, show spinner
             mainImage.classList.remove('loaded');
+            loadingSpinner.classList.add('visible');
 
-            // Small delay for transition effect
-            setTimeout(() => {
-                mainImage.src = current.src;
-                mainImage.onload = () => mainImage.classList.add('loaded');
-            }, 80);
-
+            // Update caption & counter immediately
             captionText.textContent = current.caption;
             imageCounter.textContent = `${currentIndex + 1} / ${filteredImages.length}`;
             progressFill.style.width = `${((currentIndex + 1) / filteredImages.length) * 100}%`;
+
+            // Load image via temp Image to detect when ready
+            const tempImg = new Image();
+
+            tempImg.onload = () => {
+                mainImage.src = current.src;
+                // Double requestAnimationFrame ensures browser has painted the reset
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        mainImage.classList.add('loaded');
+                        loadingSpinner.classList.remove('visible');
+                        // Preload neighbors after current finishes
+                        preloadAdjacent();
+                    });
+                });
+            };
+
+            tempImg.onerror = () => {
+                loadingSpinner.classList.remove('visible');
+                captionText.textContent = current.caption + ' — failed to load';
+            };
+
+            // If already in preloadCache, onload fires nearly instantly
+            tempImg.src = current.src;
         }
 
         function showNext() {
