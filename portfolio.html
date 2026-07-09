@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photography Portfolio &mdash; Piyush Maiti</title>
+    <meta name="description" content="Photography portfolio of Piyush Maiti — landscape, cityscape, and street photography from across the United States.">
+    <link rel="canonical" href="https://piyushkmaiti.com/portfolio.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Piyush Maiti">
+    <meta property="og:url" content="https://piyushkmaiti.com/portfolio.html">
+    <meta property="og:title" content="Photography Portfolio &mdash; Piyush Maiti">
+    <meta property="og:description" content="Landscape, cityscape, and street photography from across the United States.">
+    <meta property="og:image" content="https://piyushkmaiti.com/images/portfolio/IMG_4659.jpg">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@maitipiyush">
+    <meta name="twitter:title" content="Photography Portfolio &mdash; Piyush Maiti">
+    <meta name="twitter:description" content="Landscape, cityscape, and street photography from across the United States.">
+    <meta name="twitter:image" content="https://piyushkmaiti.com/images/portfolio/IMG_4659.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -399,6 +415,16 @@
             .caption-bar { padding: 40px 20px 20px; }
             .caption-text { font-size: 15px; }
         }
+
+        /* Respect users who prefer reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -417,10 +443,6 @@
                     Portfolio
                     <span class="nav-count" id="count-portfolio"></span>
                 </a>
-                <a href="#" class="nav-item" data-category="street">
-                    Street Project
-                    <span class="nav-count" id="count-street"></span>
-                </a>
                 <a href="#" class="nav-item" data-category="landscape">
                     Landscape
                     <span class="nav-count" id="count-landscape"></span>
@@ -428,6 +450,10 @@
                 <a href="#" class="nav-item" data-category="cityscape">
                     Cityscape
                     <span class="nav-count" id="count-cityscape"></span>
+                </a>
+                <a href="#" class="nav-item" data-category="street">
+                    Street Project
+                    <span class="nav-count" id="count-street"></span>
                 </a>
                 <a href="#" class="nav-item" data-category="random">
                     Random
@@ -501,6 +527,7 @@
             "19938321413_80d6859877_o.jpg": "Leaves, Black & White",
             "DSC02852-Enhanced-NR-Edit.jpg": "Lake Manzanita, Lassen Volcanic National Park",
             "IMG_4659.jpg": "Trillium Lake, Mt. Hood, Oregon",
+            "IMG_4721.jpg": "Trillium Lake, Mt. Hood, Oregon",
             "Yosemite-2024-04-11-09-21-59.jpg": "Yosemite National Park, California",
             "IMG_9320.JPG": "Yosemite National Park, California",
             "_DSC4162.jpg": "Yellowstone National Park, Wyoming",
@@ -511,20 +538,30 @@
         // ===== IMAGE DATA =====
         const IMAGE_FOLDERS = {
             'portfolio': 'images/portfolio/',
-            'street': 'images/street/',
             'landscape': 'images/landscape/',
             'cityscape': 'images/cityscape/',
+            'street': 'images/street/',
             'random': 'images/random/',
             'old': 'images/old/'
         };
 
         const IMAGE_FILES = {
-            'portfolio': ['IMG_4659.jpg'],
-            'street': [],
-            'landscape': ['IMG_4659.jpg', '_DSC4162.jpg','_DSC4179.jpg', '_DSC4180.jpg'],
+            'portfolio': ['IMG_4659.jpg', 'IMG_4721.jpg'],
+            'landscape': ['IMG_4659.jpg', 'IMG_4721.jpg', '_DSC4162.jpg','_DSC4179.jpg', '_DSC4180.jpg'],
             'cityscape': ['DSC09746.png', 'DSC01738.jpg', 'IMG_1116.JPG', 'IMG_3362-Enhanced-NR-Edit.jpg'],
+            'street': ['DSC00460-Edit.jpg', 'DSC00486-Edit.jpg', 'DSC00526.jpg', 'DSC00552.jpg', 'DSC00559.jpg', 'DSC00633-Edit.jpg', 'DSC00665.jpg', 'DSC00749.jpg', 'DSC01811.jpg', 'IMG_1408.jpg', 'IMG_9632-Edit.jpg', 'SEATTLE_dtla.jpg', 'SEATTLE_dtla_1.jpg'],
             'random': ['Yosemite-2024-04-11-09-21-59.jpg', 'IMG_9320.JPG', '19938321413_80d6859877_o.jpg'],
-            'old': []
+            'old': ['12317892_1503793203248746_463737454_n_17851604794052871.jpg', '1a127b005d3bc235756d89a1ad69157f.jpg', '26331587_1785814645057532_5353868040897298432_n_17908286932119447.jpg', '35f125adf230c58dd9eb4f8cb787cecd.jpg', '6b8a93db46d58f3dd4ec70853957c792.jpg', '6c2eae5a08cd97266a52e715dd22571b.jpg', '6fc3a608a0f25b13e63546250a638ead.jpg', '8d9e16707acba6726329592f6c40b088.jpg', 'c039b914dbc80c84fce464cd6321d4b5.jpg', 'c702c50530a1b3dd2104bc8350ee640b.jpg', 'c9c060afd288ee8bcd6cfe6414538e12.jpg', 'dc291aee9b5ed1a2517962c311bace2c.jpg', 'e30f086c75ea42198a764d32bbae60a5.jpg', 'e6a378d3e12892a60c11ff168d6f35da.jpg', 'f3a34e065d28178f6a5b1f253b6159c5.jpg', 'f693b293e69e6eea43ada2866642d2dd.jpg']
+        };
+
+        // Fallback caption per category, used when a file has no entry in CAPTIONS
+        const CATEGORY_LABELS = {
+            'portfolio': 'Portfolio',
+            'street': 'Street Photography',
+            'landscape': 'Landscape',
+            'cityscape': 'Cityscape',
+            'random': 'Random',
+            'old': 'From the Archive'
         };
 
         let galleryImages = [];
@@ -549,7 +586,7 @@
                 files.forEach(filename => {
                     let caption = CAPTIONS[filename];
                     if (!caption) {
-                        caption = filename.replace(/\.[^/.]+$/, "").replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                        caption = CATEGORY_LABELS[category] || filename.replace(/\.[^/.]+$/, "").replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
                     }
                     galleryImages.push({ src: folderPath + filename, caption, category, filename });
                 });
