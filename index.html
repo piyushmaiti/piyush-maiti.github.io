@@ -3,7 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>document.documentElement.classList.add('js');</script>
     <title>Piyush Maiti</title>
+    <meta name="description" content="Piyush Maiti — AI Engineer at Whissle.ai and neuroimaging data analyst building AI-powered clinical assessment tools. Amateur landscape and street photographer.">
+    <link rel="canonical" href="https://piyushkmaiti.com/">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Piyush Maiti">
+    <meta property="og:url" content="https://piyushkmaiti.com/">
+    <meta property="og:title" content="Piyush Maiti &mdash; AI Engineer &amp; Photographer">
+    <meta property="og:description" content="AI Engineer and neuroimaging data analyst building AI-powered clinical assessment tools. Amateur landscape and street photographer.">
+    <meta property="og:image" content="https://piyushkmaiti.com/images/portfolio/IMG_4659.jpg">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@maitipiyush">
+    <meta name="twitter:title" content="Piyush Maiti &mdash; AI Engineer &amp; Photographer">
+    <meta name="twitter:description" content="AI Engineer and neuroimaging data analyst building AI-powered clinical assessment tools. Amateur landscape and street photographer.">
+    <meta name="twitter:image" content="https://piyushkmaiti.com/images/portfolio/IMG_4659.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -624,7 +641,7 @@
         }
 
         /* ===== REVEAL ANIMATIONS ===== */
-        .reveal {
+        .js .reveal {
             opacity: 0;
             transform: translateY(40px);
             transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
@@ -632,7 +649,7 @@
 
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        .stagger > * {
+        .js .stagger > * {
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
@@ -643,6 +660,16 @@
         .stagger.visible > *:nth-child(3) { transition-delay: 0.16s; opacity: 1; transform: translateY(0); }
         .stagger.visible > *:nth-child(4) { transition-delay: 0.24s; opacity: 1; transform: translateY(0); }
         .stagger.visible > *:nth-child(5) { transition-delay: 0.32s; opacity: 1; transform: translateY(0); }
+
+        /* Respect users who prefer reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -672,9 +699,9 @@
             <div class="section-number">01</div>
             <div class="reveal">
                 <p class="section-label">Research</p>
-                <h2 class="section-title">Neuroimaging<br>Data Analyst</h2>
+                <h2 class="section-title">AI<br>Engineer</h2>
                 <p class="section-description">
-                    Currently at <a href="https://rabinovicilab.ucsf.edu/" target="_blank">RABLAB</a> under the mentorship of Dr. Gil Rabinovici and Dr. Renaud La Joie, processing and analyzing multimodal PET and MRI data from a multisite early-onset Alzheimer's disease cohort. Developing and validating tools for quantitative analysis and quality control of large-scale neuroimaging datasets.
+                    I am building AI-powered clinical assessment tools that combine speech AI, generative models, and LLM-driven pipelines to bring automated neuropsychological screening to scale, with a focus on real-world deployment in memory and aging clinics. My work includes real-time speech-to-text and text-to-speech systems, NLP scoring engines that grade cognitive test domains from voice transcripts, and computer-vision pipelines that auto-score hand-drawn visuospatial tasks using graph matching techniques. I'm focused on building clinical-grade tools that are fast, accurate, and easy to deploy, whether in the cloud or on-premise through containerized ASR/TTS infrastructure.
                 </p>
             </div>
 
@@ -682,9 +709,14 @@
                 <p class="experience-group-title">Experience</p>
                 <div class="stagger">
                     <div class="experience-item">
+                        <h4>AI Engineer</h4>
+                        <p class="institution"><a href="https://whissle.ai/" target="_blank">Whissle.ai</a></p>
+                        <p class="year-range">Jun 2026 &ndash; Present</p>
+                    </div>
+                    <div class="experience-item">
                         <h4>Neuroimaging Data Analyst</h4>
                         <p class="institution"><a href="https://rabinovicilab.ucsf.edu/" target="_blank">RABLAB</a>, Memory and Aging Center, UC San Francisco</p>
-                        <p class="year-range">Apr 2023 &ndash; Present</p>
+                        <p class="year-range">Apr 2023 &ndash; Jul 2026</p>
                     </div>
                     <div class="experience-item">
                         <h4>Staff Scientist</h4>
@@ -722,7 +754,7 @@
             </div>
 
             <div class="reveal">
-                <a href="document/Piyush_Maiti_CV_V.8.pdf" target="_blank" class="cv-link">&#128196; Download Full CV &nearr;</a>
+                <a href="document/Piyush_Maiti_CV_V12.pdf" target="_blank" class="cv-link">&#128196; Download Full CV &nearr;</a>
                 <br>
                 <a href="research.html" class="cta-link cta-research">
                     Explore Research <span class="arrow">&rarr;</span>
@@ -762,22 +794,11 @@
             <h2 class="life-title">Life Outside the Lab</h2>
             <div class="life-content">
                 <p>
-                    When I'm not analyzing neuroimaging data or capturing landscapes through my lens, 
-                    you'll find me training for triathlons, exploring new routes on my bike, 
-                    experimenting with flavors in the kitchen, or working with paint and canvas. 
-                    I believe in maintaining balance between rigorous scientific work and creative pursuits.
+                    Outside of work, I'm usually out on a trail run, on my bike, experimenting in the kitchen,
+                    or somewhere with my camera. I've come to endurance sport fairly recently and love it.
+                    The long runs and rides clear my head as much as they tire my legs. Cooking scratches the
+                    same itch for precision, and photography keeps me paying attention to the world around me.
                 </p>
-                <p>
-                    Running and cycling offer the mental clarity that fuels my analytical work, 
-                    while cooking allows me to experiment with precision in a completely different domain. 
-                    Painting provides yet another form of visual expression—working with color, texture, 
-                    and abstraction in ways that complement my photography but stand entirely on their own.
-                </p>
-            </div>
-            <div class="life-cta-wrapper">
-                <a href="art.html" class="cta-link cta-life">
-                    View My Paintings <span class="arrow">&rarr;</span>
-                </a>
             </div>
         </div>
     </section>
@@ -790,7 +811,7 @@
             <div class="contact-row">
                 <div class="contact-item">
                     <svg class="contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                    <a href="mailto:piyush.maiti@ucsf.edu">piyush.maiti@ucsf.edu</a>
+                    <a href="mailto:maitikpiyush@gmail.com">maitikpiyush@gmail.com</a>
                 </div>
                 <div class="contact-item">
                     <svg class="contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
@@ -811,7 +832,7 @@
                     Scholar
                 </a>
             </div>
-            <p class="copyright">&copy; 2025 Piyush Maiti. All rights reserved.</p>
+            <p class="copyright">&copy; <span id="copyright-year">2026</span> Piyush Maiti. All rights reserved.</p>
         </div>
     </footer>
 
@@ -825,6 +846,8 @@
         }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
         document.querySelectorAll('.reveal, .stagger').forEach(el => observer.observe(el));
+
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
     </script>
 
 </body>

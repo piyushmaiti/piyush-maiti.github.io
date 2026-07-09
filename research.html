@@ -3,7 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>document.documentElement.classList.add('js');</script>
     <title>Research &amp; Publications &mdash; Piyush Maiti</title>
+    <meta name="description" content="Research and publications by Piyush Maiti on neuroimaging, multimodal PET/MRI analysis, and tools for quantitative analysis and quality control of large-scale brain imaging datasets.">
+    <link rel="canonical" href="https://piyushkmaiti.com/research.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Piyush Maiti">
+    <meta property="og:url" content="https://piyushkmaiti.com/research.html">
+    <meta property="og:title" content="Research &amp; Publications &mdash; Piyush Maiti">
+    <meta property="og:description" content="Neuroimaging research and publications: multimodal PET/MRI analysis and quantitative tools for large-scale brain imaging datasets.">
+    <meta property="og:image" content="https://piyushkmaiti.com/images/portfolio/IMG_4659.jpg">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@maitipiyush">
+    <meta name="twitter:title" content="Research &amp; Publications &mdash; Piyush Maiti">
+    <meta name="twitter:description" content="Neuroimaging research and publications: multimodal PET/MRI analysis and quantitative tools for large-scale brain imaging datasets.">
+    <meta name="twitter:image" content="https://piyushkmaiti.com/images/portfolio/IMG_4659.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -101,7 +118,7 @@
         .footer p { font-size: 14px; color: var(--t3); font-weight: 300; }
         .footer a { color: var(--blue); text-decoration: none; }
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s var(--eo), transform 0.7s var(--eo); }
+        .js .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s var(--eo), transform 0.7s var(--eo); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 768px) {
@@ -111,6 +128,16 @@
             .pi-h { flex-direction: column; } .footer { padding: 40px 20px; }
         }
         html { scroll-behavior: smooth; }
+
+        /* Respect users who prefer reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
     </style>
 </head>
 <body>
