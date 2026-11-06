@@ -367,12 +367,15 @@
             color: var(--text-secondary);
             text-decoration: none;
             border-bottom: 1px dotted var(--text-muted);
-            transition: all 0.3s;
+            /* solid underline that draws left to right on hover */
+            background: linear-gradient(currentColor, currentColor) left bottom / 0 1px no-repeat;
+            transition: color 0.3s, border-color 0.3s, background-size 0.35s var(--ease-out);
         }
 
         .experience-item .institution a:hover {
             color: var(--accent-blue);
-            border-bottom-color: var(--accent-blue);
+            border-bottom-color: transparent;
+            background-size: 100% 1px;
         }
 
         .education-focus {
@@ -866,6 +869,13 @@
         .projects-title:last-child { margin-bottom: 40px; }  /* no intro line under the heading */
         .intro-inner { max-width: 780px; }  /* wide enough for all five tags on one line (~665px) */
         @media (max-width: 900px) { .split-section, .projects-section { padding-left: 24px; padding-right: 24px; } }
+    
+        /* ===== MOTION ===== */
+        /* Pages cross-fade into each other (browsers without support just navigate normally) */
+        @view-transition { navigation: auto; }
+        /* Day/night switch: the new theme grows out of the pill in a circle (see the toggle script) */
+        html.theme-vt::view-transition-old(root), html.theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+        @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
     </style>
 </head>
 <body>
@@ -1172,11 +1182,34 @@
             pills.forEach(function (p) {
                 p.addEventListener('click', function () {
                     var next = root.getAttribute('data-theme') === 'day' ? 'night' : 'day';
-                    root.classList.add('theme-anim');
-                    root.setAttribute('data-theme', next);
-                    try { localStorage.setItem('pm-theme', next); } catch (e) {}
-                    sync();
-                    setTimeout(function () { root.classList.remove('theme-anim'); }, 600);
+                    function apply() {
+                        root.setAttribute('data-theme', next);
+                        try { localStorage.setItem('pm-theme', next); } catch (e) {}
+                        sync();
+                    }
+                    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                    if (document.startViewTransition && !reduce) {
+                        // Circular reveal from the centre of the pill
+                        var r = p.getBoundingClientRect();
+                        var x = r.left + r.width / 2, y = r.top + r.height / 2;
+                        var radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+                        root.classList.add('theme-vt');
+                        var started = false;
+                        var vt = document.startViewTransition(function () { started = true; apply(); });
+                        // Safety net: if the transition doesn't start quickly, switch instantly
+                        setTimeout(function () { if (!started) vt.skipTransition(); }, 500);
+                        vt.ready.then(function () {
+                            root.animate(
+                                { clipPath: ['circle(0px at ' + x + 'px ' + y + 'px)', 'circle(' + radius + 'px at ' + x + 'px ' + y + 'px)'] },
+                                { duration: 650, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', pseudoElement: '::view-transition-new(root)' }
+                            );
+                        }).catch(function () {});  // skipped (e.g. another transition started): the theme still switches
+                        vt.finished.finally(function () { root.classList.remove('theme-vt'); });
+                    } else {
+                        root.classList.add('theme-anim');
+                        apply();
+                        setTimeout(function () { root.classList.remove('theme-anim'); }, 600);
+                    }
                 });
             });
             sync();
