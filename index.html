@@ -334,8 +334,8 @@
             z-index: 1;
             transition: background-color 0.35s var(--ease-out), border-color 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
         }
-        /* With JS: dots stay hollow until the drawn line reaches them, then fill blue */
-        .js .timeline .experience-item.reached::before { background: var(--accent-blue); border-color: var(--accent-blue); }
+        /* With JS: dots stay hollow until the drawn line reaches them, then fill gold */
+        .js .timeline .experience-item.reached::before { background: var(--accent-gold); border-color: var(--accent-gold); }
         .timeline .year-range { order: -1; margin: 0 0 4px; font-size: 13px; }
         /* Most recent role highlighted */
         .timeline.highlight-first .experience-item:first-child {
@@ -345,7 +345,7 @@
             padding: 16px 20px;
             margin-bottom: 12px;
         }
-        .timeline.highlight-first .experience-item:first-child::before { top: 23px; background: var(--accent-blue); border-color: var(--accent-blue); box-shadow: 0 0 0 4px var(--accent-blue-dim); }
+        .timeline.highlight-first .experience-item:first-child::before { top: 23px; background: var(--accent-gold); border-color: var(--accent-gold); box-shadow: 0 0 0 4px var(--accent-gold-dim); }
         .js .timeline.highlight-first .experience-item:first-child:not(.reached)::before { background: var(--bg-primary); border-color: var(--text-muted); box-shadow: none; }
         .timeline.highlight-first .experience-item:first-child h4 { font-size: 21px; }
         .timeline.highlight-first .experience-item:first-child .year-range { color: var(--accent-gold); }
