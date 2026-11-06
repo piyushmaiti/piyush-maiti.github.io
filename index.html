@@ -311,7 +311,18 @@
         }
 
         /* Timeline: a vertical line with a dot per entry, dates above each title */
-        .timeline { border-left: 1px solid var(--border-hover); margin-left: 5px; padding-left: 24px; }
+        .timeline { position: relative; margin-left: 5px; padding-left: 24px; }
+        /* The line is its own element so it can "draw" downward as you scroll (see the
+           timeline script at the end of the page). --draw goes 0 → 1; without JS it stays fully drawn. */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 1px;
+            background: var(--border-hover);
+            transform-origin: top;
+            transform: scaleY(var(--draw, 1));
+        }
         .timeline .experience-item::before {
             content: '';
             position: absolute;
@@ -320,7 +331,11 @@
             border-radius: 50%;
             background: var(--bg-primary);
             border: 1px solid var(--text-muted);
+            z-index: 1;
+            transition: background-color 0.35s var(--ease-out), border-color 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
         }
+        /* With JS: dots stay hollow until the drawn line reaches them, then fill blue */
+        .js .timeline .experience-item.reached::before { background: var(--accent-blue); border-color: var(--accent-blue); }
         .timeline .year-range { order: -1; margin: 0 0 4px; font-size: 13px; }
         /* Most recent role highlighted */
         .timeline.highlight-first .experience-item:first-child {
@@ -331,6 +346,7 @@
             margin-bottom: 12px;
         }
         .timeline.highlight-first .experience-item:first-child::before { top: 23px; background: var(--accent-blue); border-color: var(--accent-blue); box-shadow: 0 0 0 4px var(--accent-blue-dim); }
+        .js .timeline.highlight-first .experience-item:first-child:not(.reached)::before { background: var(--bg-primary); border-color: var(--text-muted); box-shadow: none; }
         .timeline.highlight-first .experience-item:first-child h4 { font-size: 21px; }
         .timeline.highlight-first .experience-item:first-child .year-range { color: var(--accent-gold); }
 
@@ -1106,6 +1122,35 @@
         }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
         document.querySelectorAll('.reveal, .stagger').forEach(el => observer.observe(el));
+
+        // Timeline: the line draws downward as you scroll; each dot fills when the line reaches it.
+        // The line's tip follows a point 70% of the way down the screen. Reduced motion: fully drawn.
+        (function () {
+            const timelines = Array.from(document.querySelectorAll('.timeline'));
+            if (!timelines.length) return;
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            function update() {
+                const tip = window.innerHeight * 0.7;
+                timelines.forEach(tl => {
+                    const box = tl.getBoundingClientRect();
+                    const progress = reduce ? 1 : Math.min(1, Math.max(0, (tip - box.top) / box.height));
+                    tl.style.setProperty('--draw', progress.toFixed(4));
+                    const drawn = progress * box.height;
+                    tl.querySelectorAll('.experience-item').forEach(item => {
+                        const dot = item.getBoundingClientRect().top - box.top + 20;  // dot centre
+                        item.classList.toggle('reached', drawn >= dot);
+                    });
+                });
+            }
+            let queued = false;
+            window.addEventListener('scroll', () => {
+                if (queued) return;
+                queued = true;
+                requestAnimationFrame(() => { queued = false; update(); });
+            }, { passive: true });
+            window.addEventListener('resize', update);
+            update();
+        })();
 
         document.querySelectorAll('.deck').forEach(deck => {
             deck.addEventListener('click', () => deck.classList.toggle('open'));
